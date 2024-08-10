@@ -6,7 +6,7 @@ const AppRouter = () => {
     const [isAuth, setIsAuth] = React.useState(false);
 
     return (
-        <div>
+        <div className="container w-100">
             {
                 (isAuth)
                     ?

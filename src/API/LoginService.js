@@ -14,4 +14,13 @@ export default class LoginService {
             }
         })
     }
+
+    static async getUserById(id) {
+        return axiosApi.get("/users/" + id, {
+            auth: {
+                // username: store.state.AuthModule.credentials.username,
+                // password: store.state.AuthModule.credentials.password
+            }
+        })
+    }
 }
