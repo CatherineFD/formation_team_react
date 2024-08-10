@@ -1,0 +1,14 @@
+.setting {
+  display: flex;
+  align-items: center;
+
+  & img {
+    cursor: pointer;
+    transition: all 0.3s linear;
+
+    &:hover {
+      transform: rotate(90deg) scale(1.1);
+    }
+  }
+
+}

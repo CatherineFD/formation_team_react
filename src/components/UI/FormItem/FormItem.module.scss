@@ -1,0 +1,40 @@
+.form__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 20px;
+    &:first-child{
+        margin-top: 0;
+    }
+
+    &.error {
+        color: #D12937;
+
+        &::slotted(input) {
+            border-color: #D12937;
+        }
+        &::slotted(textarea) {
+            border-color: #D12937;
+        }
+        &::slotted(select) {
+            border-color: #D12937;
+        }
+    }
+
+    & img {
+        height: 25px;
+        position: absolute;
+        left: 93%;
+        top: 53%;
+
+    }
+}
+
+@media (min-width: 991.98px) {
+
+    .form__item {
+        font-size: 16px;
+    }
+}
