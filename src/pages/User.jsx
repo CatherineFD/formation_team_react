@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Loader from "../components/UI/Loader/Loader";
 import {useNavigate, useParams} from "react-router-dom";
 import ButtonSetting from "../components/UI/ButtonSetting/ButtonSetting";
 import "../style/User.scss";
 import user_image from "../assets/user/user.png";
 import UserMenuTests from "../components/user/UserMenuTests/UserMenuTests";
+import {UserContext} from "../context/UserContext";
 
 const User = () => {
     const params = useParams();
     const [isLoading, setLoading] = React.useState(false);
     const [user, setUser] = React.useState({firstName: 'Екатерина', lastName: 'Фирсова', email: '1111@yandex.ru'});
+    // const {user} = useContext(UserContext);
+
 
     const router = useNavigate();
 

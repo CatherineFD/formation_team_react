@@ -5,15 +5,13 @@ import TestCompetence from "../pages/TestCompetence";
 
 
 export const privateRoutes = [
-    // {path: '/about', component: About, exact: true},
-    // {path: '/posts', component: Posts, exact: true},
-    // {path: '/posts/:id', component: PostIdPage, exact: true}
+    {path: '/user', component: User, exact: true},
+    {path: '/test-competence', component: TestCompetence, exact: true}
 ]
 
 export const publicRoutes = [
     {path: '/login', component: Login, exact: true},
     {path: '/register', component: Register, exact: true},
 
-    {path: '/', component: User, exact: true},
-    {path: '/test-competence', component: TestCompetence, exact: true}
+
 ]

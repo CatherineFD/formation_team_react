@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {privateRoutes, publicRoutes} from "../router";
+import {UserContext} from "../context/UserContext";
 
 const AppRouter = () => {
-    const [isAuth, setIsAuth] = React.useState(false);
+    const {isAuth} = useContext(UserContext);
 
     return (
         <div className="container w-100">
@@ -32,6 +33,8 @@ const AppRouter = () => {
                                 exact={route.exact}
                             />
                         )}
+
+                        <Route path="*" element={<Navigate to={"/login"}/>}/>
                     </Routes>
             }
 

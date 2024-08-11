@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import FormItem from "../components/UI/FormItem/FormItem";
 import FormButton from "../components/UI/FormButton/FormButton";
 import '../style/Login.scss';
 import LoginService from "../API/LoginService";
+import {UserContext} from "../context/UserContext";
 
 const Login = () => {
     const [isEmailError, setIsEmailError] = React.useState(false);
@@ -10,6 +11,8 @@ const Login = () => {
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+
+    const {login} = useContext(UserContext);
 
     const handlerChangeEmail = (event) => {
         setEmail(event.target.value.trim());
@@ -25,9 +28,9 @@ const Login = () => {
         }
     };
 
-    const login = async (e) => {
+    const loginUser = async (e) => {
         e.preventDefault();
-        const response = await LoginService.login(email, password);
+        const response = login(email, password);
         console.log(response);
     }
 
@@ -60,7 +63,7 @@ const Login = () => {
                     </FormItem>
 
 
-                    <FormButton isAnyError={false} title={'Войти'} isLoading={false} onClick={login}></FormButton>
+                    <FormButton isAnyError={false} title={'Войти'} isLoading={false} onClick={loginUser}></FormButton>
                 </form>
 
                 <div className="login__create">Нет аккаунта? <br/>

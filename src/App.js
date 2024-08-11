@@ -1,17 +1,24 @@
-// import logo from './logo.svg';
 import './style/App.css';
-import Login from "./pages/Login";
-import {BrowserRouter} from "react-router-dom";
 import Navbar from "./components/UI/Navbar/Navbar";
 import AppRouter from "./components/AppRouter";
+import {useContext, useEffect} from "react";
+import {UserContext} from "./context/UserContext";
 
 function App() {
+    const {isAuth, getUsername, getPassword, login} = useContext(UserContext);
+
+    useEffect(() => {
+        if (isAuth) {
+            login(getUsername, getPassword);
+        }
+    }, [isAuth, getUsername, getPassword ]);
+
   return (
     <div className="App">
-        <BrowserRouter>
+
             <Navbar/>
             <AppRouter/>
-        </BrowserRouter>
+
     </div>
   );
 }
