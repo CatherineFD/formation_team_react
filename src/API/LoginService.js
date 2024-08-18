@@ -15,6 +15,16 @@ export default class LoginService {
         })
     }
 
+    static async register(email, password, firstName, lastName, phone) {
+        return axiosApi.post('/register', {
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone
+        }, {});
+    }
+
     static async getUserById(id) {
         return axiosApi.get("/users/" + id, {
             auth: {

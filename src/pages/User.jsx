@@ -6,12 +6,15 @@ import "../style/User.scss";
 import user_image from "../assets/user/user.png";
 import UserMenuTests from "../components/user/UserMenuTests/UserMenuTests";
 import {UserContext} from "../context/UserContext";
+import {TransitionGroup, CSSTransition} from "react-transition-group";
+import ResultTestCompetence from "../components/user/ResultTestCompetence/ResultTestCompetence";
 
 const User = () => {
     const params = useParams();
     const [isLoading, setLoading] = React.useState(false);
-    const [user, setUser] = React.useState({firstName: 'Екатерина', lastName: 'Фирсова', email: '1111@yandex.ru'});
-    // const {user} = useContext(UserContext);
+    const [menuView, setMenuView] = React.useState('');
+    // const [user, setUser] = React.useState({firstName: 'Екатерина', lastName: 'Фирсова', email: '1111@yandex.ru'});
+    const {user} = useContext(UserContext);
 
 
     const router = useNavigate();
@@ -54,11 +57,18 @@ const User = () => {
 
                         </div>
                         {/*Number($route.query.show)*/}
-                        <UserMenuTests numberTest={ 1} onChange={changeTest}/>
+                        <UserMenuTests numberTest={menuView || 3} onChange={changeTest}/>
 
+                        <button onClick={() => router('/test-competence')}>Пройти тест</button>
 
                         <div className="d-flex justify-content-between">
+                            <TransitionGroup>
+                                {(menuView === 3) &&
+                                    <ResultTestCompetence result={user['competenceResult']}></ResultTestCompetence>
+                                    }
 
+
+                            </TransitionGroup>
 
                         </div>
                     </div>

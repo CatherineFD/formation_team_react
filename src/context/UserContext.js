@@ -26,37 +26,45 @@ export const UserProvider = ({children}) => {
 
     const router = useNavigate();
 
+    const authSuccess = (email, password,loginResponse) => {
+
+        setUser(loginResponse);
+        setCredentials({...credentials,
+            username: email,
+            password:
+            password, id:
+            loginResponse.id,
+            role: loginResponse.role,
+            isAuthenticated: true
+        });
+        setTeams(loginResponse.teams);
+
+        localStorage.setItem("username", email);
+        localStorage.setItem("password", password);
+        localStorage.setItem("id", loginResponse.id);
+        localStorage.setItem("role", loginResponse.role);
+        localStorage.setItem("isAuthenticated", true);
+        localStorage.setItem("USER", JSON.stringify(loginResponse));
+        localStorage.setItem("teams", JSON.stringify(loginResponse.teams));
+    };
+
+    const authError = () => {
+        setCredentials({
+            ...credentials,
+            isAuthenticated: false
+        });
+    }
+
     const login = async (email, password) => {
         try {
             const response = await LoginService.login(email, password);
             const loginResponse = response.data;
 
-            setUser(loginResponse);
-            setCredentials({...credentials,
-                username: email,
-                password:
-                password, id:
-                loginResponse.id,
-                role: loginResponse.role,
-                isAuthenticated: true
-            });
-            setTeams(loginResponse.teams);
-
-            localStorage.setItem("username", email);
-            localStorage.setItem("password", password);
-            localStorage.setItem("id", loginResponse.id);
-            localStorage.setItem("role", loginResponse.role);
-            localStorage.setItem("isAuthenticated", true);
-            localStorage.setItem("USER", JSON.stringify(loginResponse));
-            localStorage.setItem("teams", JSON.stringify(loginResponse.teams));
-
+            authSuccess(email, password, loginResponse);
             router('/user');
         } catch (e) {
             console.log(e);
-            setCredentials({
-                ...credentials,
-                isAuthenticated: false
-            });
+            authError();
         }
     };
 
@@ -66,6 +74,19 @@ export const UserProvider = ({children}) => {
             isAuthenticated: false
         });
         localStorage.clear();
+    };
+
+    const onRegister = async (email, password, firstName, lastName, phone) => {
+
+        try {
+            const response = await LoginService.register(email, password, firstName, lastName, phone);
+            const loginResponse = response.data;
+
+            authSuccess(email, password, loginResponse);
+            router('/test');
+        } catch (e) {
+            authError();
+        }
     }
 
 
@@ -82,7 +103,8 @@ export const UserProvider = ({children}) => {
             getPassword,
             getId,
             login,
-            onLogout
+            onLogout,
+            onRegister
         }}>
             {children}
         </UserContext.Provider>

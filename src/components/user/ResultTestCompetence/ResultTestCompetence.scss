@@ -1,0 +1,48 @@
+.results {
+  &__title {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+  }
+
+  .back {
+    margin: auto 0;
+
+    &__button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      font-size: 14px;
+      color: #070C1F;
+      padding: 5px 11px;
+      border: none;
+      background: #FFFFFF;
+      border-radius: 11px;
+      transition: 0.2s all linear;
+
+      &:hover {
+        transform: scale(98%);
+      }
+
+      & img {
+        max-height: 20px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .title {
+    margin-right: 30px;
+    font-size: 27px;
+  }
+
+
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+  }
+}

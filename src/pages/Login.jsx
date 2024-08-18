@@ -2,8 +2,8 @@ import React, {useContext} from 'react';
 import FormItem from "../components/UI/FormItem/FormItem";
 import FormButton from "../components/UI/FormButton/FormButton";
 import '../style/Login.scss';
-import LoginService from "../API/LoginService";
 import {UserContext} from "../context/UserContext";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [isEmailError, setIsEmailError] = React.useState(false);
@@ -13,6 +13,7 @@ const Login = () => {
     const [password, setPassword] = React.useState('');
 
     const {login} = useContext(UserContext);
+    const router = useNavigate();
 
     const handlerChangeEmail = (event) => {
         setEmail(event.target.value.trim());
@@ -51,7 +52,7 @@ const Login = () => {
                     </FormItem>
 
                     <FormItem isError={isPasswordError} label={'Пароль'}>
-                        <div className="password__container">
+
                         <input
                             id="password"
                             value={password}
@@ -59,7 +60,7 @@ const Login = () => {
                             onKeyDown={handleKeyDown}
                             className="form__input"
                             type="email"/>
-                        </div>
+
                     </FormItem>
 
 
@@ -67,7 +68,7 @@ const Login = () => {
                 </form>
 
                 <div className="login__create">Нет аккаунта? <br/>
-                    <a href="#" >Создать новый аккаунт</a>
+                    <a onClick={() => {router('/register')}}>Создать новый аккаунт</a>
                 </div>
 
             </div>
