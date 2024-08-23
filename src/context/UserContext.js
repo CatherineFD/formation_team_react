@@ -18,6 +18,10 @@ export const UserProvider = ({children}) => {
 
     const [user, setUser] = useState(localStorage.getItem('USER') || null);
     const [teams, setTeams] = useState(localStorage.getItem('teams') || []);
+    const [competenceResult, setCompetenceResult] = useState(() => {
+        const storedCompetenceResult = localStorage.getItem('competenceResult');
+        return storedCompetenceResult ? JSON.parse(storedCompetenceResult) : [];
+    });
 
     const isAuth = credentials.isAuthenticated;
     const getUsername = credentials.username;
@@ -38,6 +42,7 @@ export const UserProvider = ({children}) => {
             isAuthenticated: true
         });
         setTeams(loginResponse.teams);
+        setCompetenceResult(loginResponse.competenceResult)
 
         localStorage.setItem("username", email);
         localStorage.setItem("password", password);
@@ -46,6 +51,7 @@ export const UserProvider = ({children}) => {
         localStorage.setItem("isAuthenticated", true);
         localStorage.setItem("USER", JSON.stringify(loginResponse));
         localStorage.setItem("teams", JSON.stringify(loginResponse.teams));
+        localStorage.setItem("competenceResult", JSON.stringify(loginResponse.competenceResult));
     };
 
     const authError = () => {
@@ -98,6 +104,8 @@ export const UserProvider = ({children}) => {
             setUser,
             teams,
             setTeams,
+            competenceResult,
+            setCompetenceResult,
             isAuth,
             getUsername,
             getPassword,

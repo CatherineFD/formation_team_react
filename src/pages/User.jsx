@@ -12,9 +12,9 @@ import ResultTestCompetence from "../components/user/ResultTestCompetence/Result
 const User = () => {
     const params = useParams();
     const [isLoading, setLoading] = React.useState(false);
-    const [menuView, setMenuView] = React.useState('');
+    const [menuView, setMenuView] = React.useState(3);
     // const [user, setUser] = React.useState({firstName: 'Екатерина', lastName: 'Фирсова', email: '1111@yandex.ru'});
-    const {user} = useContext(UserContext);
+    const {user, competenceResult} = useContext(UserContext);
 
 
     const router = useNavigate();
@@ -57,15 +57,17 @@ const User = () => {
 
                         </div>
                         {/*Number($route.query.show)*/}
-                        <UserMenuTests numberTest={menuView || 3} onChange={changeTest}/>
+                        <UserMenuTests numberTest={menuView} onChange={changeTest}/>
 
                         <button onClick={() => router('/test-competence')}>Пройти тест</button>
 
                         <div className="d-flex justify-content-between">
+
                             <TransitionGroup>
+
                                 {(menuView === 3) &&
-                                    <ResultTestCompetence result={user['competenceResult']}></ResultTestCompetence>
-                                    }
+                                    <ResultTestCompetence result={competenceResult[0]}></ResultTestCompetence>
+                                }
 
 
                             </TransitionGroup>
